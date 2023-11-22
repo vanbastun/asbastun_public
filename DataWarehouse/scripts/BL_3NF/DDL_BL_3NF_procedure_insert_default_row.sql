@@ -1,0 +1,223 @@
+---- PROCEDURE for DEFAULT rows INSERT to all descriptive tables on BL_3NF
+
+CREATE OR REPLACE PROCEDURE bl_3nf.proc_insert_bl_3nf_default_rows()
+AS $$
+BEGIN 
+	--regions
+	INSERT INTO BL_3NF.CE_REGIONS (
+			REGION_ID,
+			REGION_SRC_ID,
+			REGION_SOURCE_TABLE,
+			REGION_SOURCE_SYSTEM,
+			REGION_NAME,
+			INSERT_DT,
+			UPDATE_DT)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_REGIONS
+	    				WHERE REGION_ID = -1
+	    			);
+	    			
+	--countries
+	INSERT INTO BL_3NF.CE_COUNTRIES (
+			COUNTRY_ID,
+			COUNTRY_SRC_ID,
+			COUNTRY_SOURCE_TABLE,
+			COUNTRY_SOURCE_SYSTEM,
+			COUNTRY_NAME,
+			COUNTRY_CODE,
+			COUNTRY_REGION_ID,
+			INSERT_DT,
+			UPDATE_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', 'n.a.', -1, '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_COUNTRIES
+	    				WHERE COUNTRY_ID = -1
+	    			);
+	    			
+	--addreses
+	INSERT INTO BL_3NF.CE_ADDRESSES (
+			ADDRESS_ID,
+			ADDRESS_SRC_ID,
+			ADDRESS_SOURCE_TABLE,
+			ADDRESS_SOURCE_SYSTEM,
+			ADDRESS_TEXT,
+			ADDRESS_POSTCODE,
+			ADDRESS_COUNTRY_ID,
+			INSERT_DT,
+			UPDATE_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', 'n.a.', -1, '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_ADDRESSES
+	    				WHERE ADDRESS_ID = -1
+	    			);
+	    			
+	--customers
+	INSERT INTO BL_3NF.CE_CUSTOMERS (
+			CUSTOMER_ID,
+			CUSTOMER_SRC_ID,
+			CUSTOMER_SOURCE_TABLE,
+			CUSTOMER_SOURCE_SYSTEM,
+			CUSTOMER_NAME,
+			CUSTOMER_GENDER,
+			CUSTOMER_EMAIL,
+			CUSTOMER_BIRTHDATE_DT,
+			CUSTOMER_ADDRESS_ID,
+			INSERT_DT,
+			UPDATE_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', 'n.a.', 'n.a.', '1900-01-01'::date, -1, '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_CUSTOMERS
+	    				WHERE CUSTOMER_ID = -1
+	    			);
+	    			
+	
+	--shipments
+	INSERT INTO BL_3NF.CE_SHIPMENTS (
+			SHIPMENT_ID,		
+			SHIPMENT_SRC_ID,	
+			SHIPMENT_SOURCE_TABLE,	
+			SHIPMENT_SOURCE_SYSTEM,	
+			SHIPMENT_TRACK_NUMBER,	
+			SHIPMENT_DT,		
+			SHIPMENT_RECEIVED_DT,	
+			INSERT_DT,		
+			UPDATE_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', '1900-01-01'::date, 
+			'9999-12-31'::date, '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_SHIPMENTS
+	    				WHERE SHIPMENT_ID = -1
+	    			);
+	
+	    		
+	--currencies
+	INSERT INTO BL_3NF.CE_CURRENCIES (
+			CURRENCY_ID,		
+			CURRENCY_SRC_ID,	
+			CURRENCY_SOURCE_TABLE,	
+			CURRENCY_SOURCE_SYSTEM,	
+			CURRENCY_CODE,			
+			INSERT_DT,		
+			UPDATE_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_CURRENCIES
+	    				WHERE CURRENCY_ID = -1
+	    			);
+	    			
+	--promotions
+	INSERT INTO BL_3NF.CE_PROMOTIONS (
+			PROMOTION_ID,		
+			PROMOTION_SRC_ID,	
+			PROMOTION_SOURCE_TABLE,	
+			PROMOTION_SOURCE_SYSTEM,	
+			PROMOTION_NAME,		
+			PROMOTION_DESCRIPTION,	
+			PROMOTION_FEE_DISCOUNT_PERCENT,	
+			INSERT_DT,		
+			UPDATE_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', 'n.a.', -1, '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_PROMOTIONS
+	    				WHERE PROMOTION_ID = -1
+	    			);
+	    			
+	--product types
+	INSERT INTO BL_3NF.CE_PRODUCT_TYPES (
+			PRODUCT_TYPE_ID,		
+			PRODUCT_TYPE_SRC_ID,	
+			PRODUCT_TYPE_SOURCE_TABLE,	
+			PRODUCT_TYPE_SOURCE_SYSTEM,	
+			PRODUCT_TYPE_CODE,		
+			INSERT_DT,		
+			UPDATE_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_PRODUCT_TYPES
+	    				WHERE PRODUCT_TYPE_ID = -1
+	    			);
+	    			
+	--products
+	INSERT INTO BL_3NF.CE_PRODUCTS (
+			PRODUCT_ID,		
+			PRODUCT_SRC_ID,		
+			PRODUCT_SOURCE_TABLE,	
+			PRODUCT_SOURCE_SYSTEM,	
+			PRODUCT_URL,		
+			PRODUCT_DESCRIPTION,	
+			PRODUCT_IMAGE_URL,	
+			PRODUCT_ALBUM_TITLE,	
+			PRODUCT_TYPE_ID,		
+			INSERT_DT,		
+			UPDATE_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', 'n.a.', 'n.a.', 'n.a.', -1, '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_PRODUCTS
+	    				WHERE PRODUCT_ID = -1
+	    			);
+		    		
+	--genres
+	INSERT INTO BL_3NF.CE_GENRES (
+			GENRE_ID,		
+			GENRE_SRC_ID,		
+			GENRE_SOURCE_TABLE,	
+			GENRE_SOURCE_SYSTEM,	
+			GENRE,			
+			INSERT_DT,		
+			UPDATE_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', '1900-01-01'::date, '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_GENRES
+	    				WHERE GENRE_ID = -1
+	    			);
+	    			
+	--artists
+	INSERT INTO BL_3NF.CE_ARTISTS_SCD (
+			ARTIST_ID,		
+			ARTIST_SRC_ID,		
+			ARTIST_SOURCE_TABLE,	
+			ARTIST_SOURCE_SYSTEM,	
+			ARTIST_NAME,		
+			ARTIST_GENRE_ID,	
+			START_DT,		
+			END_DT,			
+			IS_ACTIVE,		
+			INSERT_DT
+			)
+	SELECT -1, 'n.a.', 'MANUAL', 'MANUAL', 'n.a.', -1, '1900-01-01'::date, 
+			'9999-12-31'::date, 'n.a.', '1900-01-01'::date
+	WHERE NOT EXISTS (
+	    				SELECT 1
+	    				FROM BL_3NF.CE_ARTISTS_SCD
+	    				WHERE ARTIST_ID = -1 AND START_DT = '1900-01-01'::date
+	    			);
+    			
+-- handle exceptions			
+EXCEPTION 
+	WHEN SQLSTATE '42P01' THEN
+		RAISE NOTICE 'Check relation`s names!';
+	
+	WHEN OTHERS THEN
+		RAISE;		
+END;
+$$ LANGUAGE plpgsql;
